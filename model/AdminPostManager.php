@@ -13,4 +13,16 @@ class AdminPostManager extends Manager
 
         return $req;
     }
+
+    public function postToAdd()
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('INSERT INTO posts(title, content) VALUES(:title, :content)');
+        $affectedLines = $req->execute(array(
+            'title' => $_POST['post_title'],
+            'content' => $_POST['post_content']
+        )); 
+
+        return $affectedLines;
+    }
 }

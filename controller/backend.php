@@ -14,3 +14,16 @@ function listPostsComments()
 
     require('view/backend/adminView.php');
 }
+
+function addPost()
+{
+    $postManager = new \OpenClassrooms\Blog\Model\AdminPostManager();
+    $affectedLines = $postManager->postToAdd();
+
+    if ($affectedLines === false) {
+        throw new Exception('Impossible d\'ajouter le billet !');
+    }
+    else {
+        header('Location: admin.php');
+    }
+}
