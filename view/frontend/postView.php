@@ -6,12 +6,12 @@
 
 <div class="article">
     <h3>
-        <?= htmlspecialchars($post['title']) ?>
+        <?= $post['title'] ?>
         <em>le <?= $post['creation_date_fr'] ?></em>
     </h3>
     
     <p>
-        <?= nl2br(htmlspecialchars($post['content'])) ?>
+        <?= $post['content'] ?>
     </p>
 </div>
 
