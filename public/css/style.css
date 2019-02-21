@@ -1,0 +1,220 @@
+/**********************************
+*********** MAIN ELEMENTS *********
+**********************************/
+
+body, html {
+    margin: 0;
+    padding: 0;
+
+    font-size: 1em;
+    font-family: sans-serif;
+    background: #EEE;
+    overflow-x: hidden;
+}
+
+h1, h2, h3 {
+    text-align:center;
+}
+
+h3 {
+    color:#000;
+    font-size: 1.7em;
+    margin: 10px 0 20px 0;
+}
+
+.article p, .article em {
+    font-size: 1.3em;
+}
+.article {
+    position: relative;
+    width:70%;
+    margin:auto;
+    margin-bottom: 50px;
+    padding: 30px 30px 10px 30px;
+    background: #fff;
+    color: #000;
+    border-radius: 3px;
+    border: 0px solid #ebebeb;
+    box-shadow: 0 15px 35px #3232321a,0 5px 15px #0000001a;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: blue;
+}
+
+
+/**********************************
+************** ADMIN **************
+**********************************/
+
+
+/************ tinyMCE ************/
+
+.admin_post_form {
+    display: block;
+    width:100%;
+    margin:auto;
+    background: #fff;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.admin_post_title {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    background: #fff;
+    color:#000;
+    font-size: 1.7em;
+    border-radius: 0px;
+    border: 1px solid #ccc;
+    border-bottom: 0px;
+    box-sizing: border-box;
+}
+
+#btn_post {
+    width: 300px;
+    margin: 30px 0 30px 0;
+    padding: 30px;
+    color: #000;
+    background: #eee;
+    font-size: 1.3em;
+    border-radius: 5px;
+    border: 1px solid #CCC;
+    cursor: pointer;
+}
+
+.tox .tox-toolbar__group:not(:last-of-type) {
+    border: 0 !important;
+}
+
+.tox .tox-edit-area__iframe {
+    background: #eee !important;
+    border: 1px solid #CCC !important;
+}
+
+.tox-tinymce {
+    padding: 0 20px 0 20px !important;
+    background: #fff !important;
+    border: 0 !important;
+}
+
+.tox .tox-edit-area {
+    border: 0 !important;
+}
+
+.tox .tox-statusbar {
+    border: 0 !important;
+}
+
+/************** tabs *************/
+
+#tabs {
+    position: relative;
+    display: flex;
+    background: #fff;
+}
+
+#tab_posts, 
+#tab_comments {
+    width: 50%;
+    text-align: center;
+    font-size: 1.7em;
+    padding: 30px 0 30px 0;
+    cursor: pointer;
+}
+
+#tab_line {
+    position: absolute;
+    bottom: 0;
+    width: 50%;
+    border-bottom: 5px solid #000;
+}
+
+/************ section ************/
+
+#admin_container {
+    width: 200%;
+    display: flex;
+    background: #fff;
+}
+
+#posts_container, 
+#comments_container {
+    width: 100%;
+
+    color:#000;
+    font-size: 1.7em;
+    font-weight: bold;
+}
+
+.posts_table,
+.comments_table {
+    background: #fff;
+    color: #000;
+    width: 100%;
+    box-sizing: border-box;
+    border-collapse: collapse; 
+}
+
+.posts_table tr,
+.comments_table tr {
+    border-top: 1px solid #ccc;
+}
+
+.posts_table tr:hover,
+.comments_table tr:hover {
+    background: #EEE;
+}
+
+.posts_table td,
+.comments_table td {
+    padding: 30px 0 30px 0;
+    vertical-align: top;
+}
+
+.table_delete {
+    width: 50px;
+    font-family: 'fontawesome', Arial, sans-serif;
+    font-size: 1.1em;
+    text-align: center;
+    cursor: pointer;
+}
+
+.table_edit {
+    width: 50px;
+    font-family: 'fontawesome', Arial, sans-serif;
+    text-align: center;
+    cursor: pointer;
+}
+
+.table_eye {
+    width: 50px;
+    font-family: 'fontawesome', Arial, sans-serif;
+    text-align: center;
+    cursor: pointer;
+    padding-top: 1.2em !important;
+}
+
+.table_title {
+    padding-top: 1.3em !important;
+    text-align: center;
+    cursor: pointer;
+}
+
+.table_date {
+    width: 270px;
+    padding-top: 1.3em !important;
+}
+
+.table_content {
+    display: none;
+}
+
+.table_comment {
+    padding-top: 1.3em !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}
