@@ -213,8 +213,16 @@ a {
     display: none;
 }
 
+
 .table_comment {
     padding-top: 1.3em !important;
     padding-left: 20px !important;
     padding-right: 20px !important;
+}
+
+.table_report {
+    width: 50px;
+    font-family: 'fontawesome', Arial, sans-serif;
+    text-align: center;
+    cursor: pointer;
 }

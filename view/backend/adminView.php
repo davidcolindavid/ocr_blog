@@ -76,12 +76,35 @@
                     <tbody>
                     <?php
                     // Affichage de chaque message (toutes les données sont protégées par htmlspecialchars)
+                    while ($commentReported = $commentsReported->fetch())
+                    {
+                    ?>
+                        <tr>
+                            <td class="table_report"><a href="admin.php?action=cancelReportComment&amp;id=<?= $commentReported['id'] ?>"><i class="fas fa-flag"></i></a></td>
+                            <td class="table_delete"><a href="admin.php?action=deleteComment&amp;id=<?= $commentReported['id'] ?>"><i class="fas fa-times"></i></a></td>
+                            <td class="table_eye"><i class="far fa-eye"></i></td>
+                            <td class="table_comment">
+                                Par <?= htmlspecialchars($commentReported['author']) ?> le <?= $commentReported['comment_date_fr'] ?> <br /><br />
+                                <?= nl2br(htmlspecialchars($commentReported['comment'])) ?>
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                    ?>    
+                    </tbody>
+                </table>  
+
+                <table class="comments_table" >
+                    <tbody>
+                    <?php
+                    // Affichage de chaque message (toutes les données sont protégées par htmlspecialchars)
                     while ($comment = $comments->fetch())
                     {
                     ?>
                         <tr>
-                        <td class="table_close"><a href="admin.php?action=deleteComment&amp;id=<?= $comment['id'] ?>"><i class="fas fa-times"></i></a></td>
-                            <td class="table_edit"><i class="fas fa-edit"></i></td>
+                        <td class="table_report"><i class="far fa-flag"></td>
+                            <td class="table_delete"><a href="admin.php?action=deleteComment&amp;id=<?= $commentReported['id'] ?>"><i class="fas fa-times"></i></a></td>
+                            <td class="table_eye"><i class="far fa-eye"></i></td>
                             <td class="table_comment">
                                 Par <?= htmlspecialchars($comment['author']) ?> le <?= $comment['comment_date_fr'] ?> <br /><br />
                                 <?= nl2br(htmlspecialchars($comment['comment'])) ?>

@@ -11,6 +11,7 @@ function listPostsComments()
     
     $commentManager = new \OpenClassrooms\Blog\Model\AdminCommentManager();
     $comments = $commentManager->getComments();
+    $commentsReported = $commentManager->getCommentsReported();
 
     require('view/backend/adminView.php');
 }
@@ -46,7 +47,7 @@ function updatePost($postId, $title, $content)
     $affectedLines = $postManager->PostToUpdate($postId, $title, $content);
 
     if ($affectedLines === false) {
-        throw new Exception('Impossible de supprimer le billet !');
+        throw new Exception('Impossible de mettre à jour le billet !');
     }
     else {
         header('Location: admin.php');
@@ -70,6 +71,19 @@ function deleteComment()
 {
     $commentManager = new \OpenClassrooms\Blog\Model\AdminCommentManager();
     $affectedLines = $commentManager->commentToDelete($_GET['id']);
+
+    if ($affectedLines === false) {
+        throw new Exception('Impossible de supprimer le commentaire !');
+    }
+    else {
+        header('Location: admin.php');
+    }
+}
+
+function cancelReportComment()
+{
+    $commentManager = new \OpenClassrooms\Blog\Model\AdminCommentManager();
+    $affectedLines = $commentManager->ReportCommentToCancel($_GET['id']);
 
     if ($affectedLines === false) {
         throw new Exception('Impossible de supprimer le commentaire !');
