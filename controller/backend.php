@@ -40,6 +40,19 @@ function editPost()
     require('view/backend/adminView.php');
 }
 
+function updatePost($postId, $title, $content)
+{
+    $postManager = new \OpenClassrooms\Blog\Model\AdminPostManager();
+    $affectedLines = $postManager->PostToUpdate($postId, $title, $content);
+
+    if ($affectedLines === false) {
+        throw new Exception('Impossible de supprimer le billet !');
+    }
+    else {
+        header('Location: admin.php');
+    }
+}
+
 function deletePost()
 {
     $postManager = new \OpenClassrooms\Blog\Model\AdminPostManager();

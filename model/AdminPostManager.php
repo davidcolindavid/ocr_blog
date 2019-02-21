@@ -14,6 +14,16 @@ class AdminPostManager extends Manager
         return $req;
     }
 
+    public function getPost($postId)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%i\') AS creation_date_fr FROM posts WHERE id = ?');
+        $req->execute(array($postId));
+        $post = $req->fetch();
+
+        return $post;
+    }
+
     public function postToAdd()
     {
         $db = $this->dbConnect();
@@ -43,5 +53,14 @@ class AdminPostManager extends Manager
         $form = $req->fetch();
 
         return $form;
+    }
+
+    public function postToUpdate($postId, $title, $content)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('UPDATE posts SET title = ? , content = ? WHERE id = ?');
+        $affectedLines = $req->execute(array($title, $content, $postId)); 
+
+        return $affectedLines;
     }
 }

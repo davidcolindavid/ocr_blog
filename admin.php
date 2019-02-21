@@ -36,6 +36,21 @@ try { // On essaie de faire des choses
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
         }
+        elseif ($_GET['action'] == 'updatePost') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                if (!empty($_POST['post_title']) && !empty($_POST['post_content'])) {
+                    updatePost($_GET['id'], $_POST['post_title'], $_POST['post_content']);
+                }
+                else {
+                    // Autre exception
+                    throw new Exception('Tous les champs ne sont pas remplis !');
+                }
+            }
+            else {
+                // Autre exception
+                throw new Exception('Aucun identifiant de billet envoyé');
+            }
+        }
     }
     else {
         listPostsComments();
