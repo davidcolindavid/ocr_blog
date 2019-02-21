@@ -21,7 +21,20 @@ function addPost()
     $affectedLines = $postManager->postToAdd();
 
     if ($affectedLines === false) {
-        throw new Exception('Impossible d\'ajouter le billet !');
+        throw new Exception('Impossible d\'ajouter le commentaire !');
+    }
+    else {
+        header('Location: admin.php');
+    }
+}
+
+function deletePost()
+{
+    $postManager = new \OpenClassrooms\Blog\Model\AdminPostManager();
+    $affectedLines = $postManager->postToDelete($_GET['id']);
+
+    if ($affectedLines === false) {
+        throw new Exception('Impossible de supprimer le billet !');
     }
     else {
         header('Location: admin.php');

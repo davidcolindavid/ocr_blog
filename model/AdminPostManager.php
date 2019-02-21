@@ -25,4 +25,13 @@ class AdminPostManager extends Manager
 
         return $affectedLines;
     }
+
+    public function postToDelete($postId)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('DELETE FROM posts WHERE id = ?');
+        $affectedLines = $req->execute(array($postId)); 
+
+        return $affectedLines;
+    }
 }

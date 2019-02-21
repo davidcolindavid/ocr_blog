@@ -36,7 +36,7 @@
                     ?>
                         <tr class="table_details">
 
-                            <td class="table_delete"><i class="fas fa-times"></i></td>
+                            <td class="table_delete"><a href="admin.php?action=deletePost&amp;id=<?= $data['id'] ?>"><i class="fas fa-times"></i></a></td>
                             <td class="table_edit"><i class="fas fa-edit"></i></td>
                             <td class="table_eye"><i class="far fa-eye"></i></td>
                             <td class="table_title"><?= $data['title'] ?></td>
