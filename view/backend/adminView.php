@@ -9,9 +9,25 @@
     <body>
         <h1>Administration</h1>
 
-        <form action="admin.php?action=addPost" method="post" class="admin_post_form">
-            <input type="text" class="admin_post_title" name="post_title" placeholder="Saisissez votre titre ici" />
-            <textarea id="post_content" name="post_content" >Exprimez-vous</textarea>
+        <?php 
+        if (isset($_GET['action']) == 'editPost') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $formTitle = $form['title'];
+                $formContent = $form['content'];
+                $formAction = "admin.php?action=updatePost&amp;id=" . $form['id'];
+            }
+            
+        }
+        else {
+            $formTitle = "";
+            $formContent = "Exprimez-vous";
+            $formAction = "admin.php?action=addPost";
+        }
+        ?>
+
+        <form action="<?= $formAction ?>" method="post" class="admin_post_form">
+            <input type="text" class="admin_post_title" name="post_title" placeholder="Saisissez votre titre ici" value="<?= htmlspecialchars($formTitle) ?>" />
+            <textarea id="post_content" name="post_content" ><?= $formContent ?></textarea>
             <button type="submit" id="btn_post">Envoyer</button>
         </form>
 
@@ -37,7 +53,7 @@
                         <tr class="table_details">
 
                             <td class="table_delete"><a href="admin.php?action=deletePost&amp;id=<?= $data['id'] ?>"><i class="fas fa-times"></i></a></td>
-                            <td class="table_edit"><i class="fas fa-edit"></i></td>
+                            <td class="table_edit"><a href="admin.php?action=editPost&amp;id=<?= $data['id'] ?>"><i class="fas fa-edit"></i></a></td>
                             <td class="table_eye"><i class="far fa-eye"></i></td>
                             <td class="table_title"><?= $data['title'] ?></td>
                             <td class="table_date"><?= $data['creation_date_fr'] ?></td>

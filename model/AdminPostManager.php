@@ -34,4 +34,14 @@ class AdminPostManager extends Manager
 
         return $affectedLines;
     }
+
+    public function postToEdit($postId)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%i\') AS creation_date_fr FROM posts WHERE id = ?');
+        $req->execute(array($postId));
+        $form = $req->fetch();
+
+        return $form;
+    }
 }

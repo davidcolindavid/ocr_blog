@@ -27,6 +27,15 @@ try { // On essaie de faire des choses
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
         }
+        elseif ($_GET['action'] == 'editPost') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                editPost();
+            }
+            else {
+                // Erreur ! On arrête tout, on envoie une exception, donc au saute directement au catch
+                throw new Exception('Aucun identifiant de billet envoyé');
+            }
+        }
     }
     else {
         listPostsComments();
