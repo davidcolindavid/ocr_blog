@@ -54,7 +54,7 @@
 
                             <td class="table_delete"><a href="admin.php?action=deletePost&amp;id=<?= $data['id'] ?>"><i class="fas fa-times"></i></a></td>
                             <td class="table_edit"><a href="admin.php?action=editPost&amp;id=<?= $data['id'] ?>"><i class="fas fa-edit"></i></a></td>
-                            <td class="table_eye"><i class="far fa-eye"></i></td>
+                            <td class="table_eye"><a href="index.php?action=post&amp;id=<?= $data['id'] ?>" target="_blank"><i class="far fa-eye"></i></a></td>
                             <td class="table_title"><?= $data['title'] ?></td>
                             <td class="table_date"><?= $data['creation_date_fr'] ?></td>
                         </tr>
@@ -75,14 +75,13 @@
                 <table class="comments_table" >
                     <tbody>
                     <?php
-                    // Affichage de chaque message (toutes les données sont protégées par htmlspecialchars)
                     while ($commentReported = $commentsReported->fetch())
                     {
                     ?>
                         <tr>
                             <td class="table_report"><a href="admin.php?action=cancelReportComment&amp;id=<?= $commentReported['id'] ?>"><i class="fas fa-flag"></i></a></td>
                             <td class="table_delete"><a href="admin.php?action=deleteComment&amp;id=<?= $commentReported['id'] ?>"><i class="fas fa-times"></i></a></td>
-                            <td class="table_eye"><i class="far fa-eye"></i></td>
+                            <td class="table_eye"><a href="index.php?action=post&amp;id=<?= $commentReported['post_id'] ?>" target="_blank"><i class="far fa-eye"></i></a></td>
                             <td class="table_comment">
                                 Par <?= htmlspecialchars($commentReported['author']) ?> le <?= $commentReported['comment_date_fr'] ?> <br /><br />
                                 <?= nl2br(htmlspecialchars($commentReported['comment'])) ?>
@@ -97,14 +96,13 @@
                 <table class="comments_table" >
                     <tbody>
                     <?php
-                    // Affichage de chaque message (toutes les données sont protégées par htmlspecialchars)
                     while ($comment = $comments->fetch())
                     {
                     ?>
                         <tr>
-                        <td class="table_report"><i class="far fa-flag"></td>
+                            <td class="table_report"><i class="far fa-flag"></td>
                             <td class="table_delete"><a href="admin.php?action=deleteComment&amp;id=<?= $commentReported['id'] ?>"><i class="fas fa-times"></i></a></td>
-                            <td class="table_eye"><i class="far fa-eye"></i></td>
+                            <td class="table_eye"><a href="index.php?action=post&amp;id=<?= $comment['post_id'] ?>" target="_blank"><i class="far fa-eye"></i></a></td>
                             <td class="table_comment">
                                 Par <?= htmlspecialchars($comment['author']) ?> le <?= $comment['comment_date_fr'] ?> <br /><br />
                                 <?= nl2br(htmlspecialchars($comment['comment'])) ?>
