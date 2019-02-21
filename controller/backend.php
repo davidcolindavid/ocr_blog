@@ -40,3 +40,16 @@ function deletePost()
         header('Location: admin.php');
     }
 }
+
+function deleteComment()
+{
+    $commentManager = new \OpenClassrooms\Blog\Model\AdminCommentManager();
+    $affectedLines = $commentManager->commentToDelete($_GET['id']);
+
+    if ($affectedLines === false) {
+        throw new Exception('Impossible de supprimer le commentaire !');
+    }
+    else {
+        header('Location: admin.php');
+    }
+}

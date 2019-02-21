@@ -64,7 +64,7 @@
                     {
                     ?>
                         <tr>
-                            <td class="table_close"><i class="fas fa-times"></i></td>
+                        <td class="table_close"><a href="admin.php?action=deleteComment&amp;id=<?= $comment['id'] ?>"><i class="fas fa-times"></i></a></td>
                             <td class="table_edit"><i class="fas fa-edit"></i></td>
                             <td class="table_comment">
                                 Par <?= htmlspecialchars($comment['author']) ?> le <?= $comment['comment_date_fr'] ?> <br /><br />

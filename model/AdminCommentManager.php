@@ -13,4 +13,13 @@ class AdminCommentManager extends Manager
 
         return $comments;
     }
+
+    public function commentToDelete($commentId)
+    {
+        $db = $this->dbConnect();
+        $comment = $db->prepare('DELETE FROM comments WHERE id = ?');
+        $affectedLines = $comment->execute(array($commentId)); 
+
+        return $affectedLines;
+    }
 }
