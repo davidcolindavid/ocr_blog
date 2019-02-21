@@ -30,6 +30,15 @@ try { // On essaie de faire des choses
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
         }
+        elseif ($_GET['action'] == 'reportComment') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                reportComment($_GET['id'], $_GET['postId']);
+            }
+            else {
+                // Autre exception
+                throw new Exception('Aucun identifiant de billet envoyé');
+            }
+        }
     }
     else {
         listPosts();

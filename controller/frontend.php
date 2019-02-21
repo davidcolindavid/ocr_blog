@@ -36,3 +36,17 @@ function addComment($postId, $author, $comment)
         header('Location: index.php?action=post&id=' . $postId);
     }
 }
+
+function reportComment($commentId, $postId)
+{
+    $commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
+
+    $affectedLines = $commentManager->commentToReport($commentId);
+
+    if ($affectedLines === false) {
+        throw new Exception('Impossible de signaler le commentaire !');
+    }
+    else {
+        header('Location: index.php?action=post&id=' . $postId);
+    }
+}
