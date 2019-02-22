@@ -37,6 +37,7 @@ function editPost()
 
     $commentManager = new \OpenClassrooms\Blog\Model\AdminCommentManager();
     $comments = $commentManager->getComments();
+    $commentsReported = $commentManager->getCommentsReported();
 
     require('view/backend/adminView.php');
 }
