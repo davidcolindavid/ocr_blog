@@ -24,6 +24,17 @@ function loginAdmin($username, $password)
     require('view/backend/loginView.php');
 }
 
+function logout()
+{   
+    session_start();
+    
+    // Suppression des variables de session et de la session
+    $_SESSION = array();
+    session_destroy();
+
+    header('Location: login.php');
+}
+
 function listPostsComments()
 {
     $postManager = new \OpenClassrooms\Blog\Model\AdminPostManager(); // Création d'un objet

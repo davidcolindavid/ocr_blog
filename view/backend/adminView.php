@@ -8,6 +8,7 @@
     </head>
     <body>
         <h1>Administration</h1>
+        <div id="admin_logout"><a href="admin.php?action=logout">Se déconnecter</a><div>
 
         <?php 
         if (isset($_GET['action']) == 'editPost') {

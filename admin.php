@@ -62,6 +62,9 @@ try { // On essaie de faire des choses
                     throw new Exception('Aucun identifiant de commentaire envoyé');
                 }
             }
+            elseif ($_GET['action'] == 'logout') {
+                logout();
+            }
         }
         else {
             listPostsComments();
