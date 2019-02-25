@@ -1,8 +1,28 @@
 <?php
 
 // Chargement des classes
+require_once('model/loginManager.php');
 require_once('model/AdminPostManager.php');
 require_once('model/AdminCommentManager.php');
+
+function loginAdmin($username, $password)
+{   
+    $loginManager = new \OpenClassrooms\Blog\Model\LoginManager(); // Création d'un objet
+    $correctPassword = $loginManager->getPass($username, $password); // Appel d'une fonction de cet objet
+
+    if($correctPassword){
+        // Si oui redirige vers la page admin
+        session_start();
+        $_SESSION['correctPassword'] = $correctPassword;
+        $_SESSION['pseudo'] = $username;
+        header('Location: admin.php');
+	}else{
+		// Sinon signale une erreur d'identifiant ou de mot de passe
+		echo "login/password incorrect";
+	}
+
+    require('view/backend/loginView.php');
+}
 
 function listPostsComments()
 {
