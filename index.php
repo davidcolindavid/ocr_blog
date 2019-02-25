@@ -4,7 +4,17 @@ require('controller/frontend.php');
 try { // On essaie de faire des choses
     if (isset($_GET['action'])) {
         if ($_GET['action'] == 'listPosts') {
-            listPosts();
+            $currentPage = 1;
+            listPosts($currentPage);
+        }
+        elseif ($_GET['action'] == 'page') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $currentPage = $_GET['id'];
+                listPosts($currentPage);
+            }
+            else {
+                $currentPage = 1;
+            }
         }
         elseif ($_GET['action'] == 'post') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
@@ -41,7 +51,8 @@ try { // On essaie de faire des choses
         }
     }
     else {
-        listPosts();
+        $currentPage = 1;
+        listPosts($currentPage);
     }
 }
 catch(Exception $e) { // S'il y a eu une erreur, alors...

@@ -4,7 +4,7 @@
 <h1>Mon titre</h1>
 <p>Derniers billets du blog :</p>
 
-
+<div id="listposts">
 <?php
 while ($data = $posts->fetch())
 {
@@ -25,6 +25,21 @@ while ($data = $posts->fetch())
 }
 $posts->closeCursor();
 ?>
+</div>
+
+<div id="paging">
+<?php
+for ($i = 1; $i <= $nbPage; $i++) {
+    if ($i == $currentPage) {
+        echo " $i /";
+    }
+    else {
+        echo " <a href=\"index.php?action=page&amp;id=$i\">$i</a> /";
+    }
+}
+?>
+</div>
+
 <?php $content = ob_get_clean(); ?>
 
 <?php require('template.php'); ?>

@@ -4,10 +4,19 @@
 require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
 
-function listPosts()
-{
+function listPosts($currentPage)
+{   
+    
+    $perPage = 4;
+    //$currentPage = 1;
+
     $postManager = new \OpenClassrooms\Blog\Model\PostManager(); // Création d'un objet
-    $posts = $postManager->getPosts(); // Appel d'une fonction de cet objet
+    $posts = $postManager->getPosts($perPage, $currentPage); // Appel d'une fonction de cet objet
+
+    
+    $paging = $postManager->getPaging();
+    
+    $nbPage = ceil($paging['nb_posts'] / $perPage);
 
     require('view/frontend/listPostsView.php');
 }
