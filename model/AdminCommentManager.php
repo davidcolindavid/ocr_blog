@@ -22,6 +22,15 @@ class AdminCommentManager extends Manager
         return $commentsReported;
     }
 
+    public function commentsFromPostToDelete($postId)
+    {
+        $db = $this->dbConnect();
+        $comment = $db->prepare('DELETE FROM comments WHERE post_id = ?');
+        $affectedLinesComm = $comment->execute(array($postId)); 
+
+        return $affectedLinesComm;
+    }
+
     public function commentToDelete($commentId)
     {
         $db = $this->dbConnect();

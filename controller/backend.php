@@ -89,10 +89,16 @@ function updatePost($postId, $title, $content)
 function deletePost()
 {
     $postManager = new \OpenClassrooms\Blog\Model\AdminPostManager();
+    $commentManager = new \OpenClassrooms\Blog\Model\AdminCommentManager();
+    
     $affectedLines = $postManager->postToDelete($_GET['id']);
+    $affectedLinesComm = $commentManager->commentsFromPostToDelete($_GET['id']);
 
     if ($affectedLines === false) {
         throw new Exception('Impossible de supprimer le billet !');
+    }
+    elseif ($affectedLinesComm === false) {
+        throw new Exception('Impossible de supprimer les commentaires associés au billet !');
     }
     else {
         header('Location: admin.php');
