@@ -14,14 +14,3 @@ document.querySelector("#tab_posts").addEventListener('click', function () {
     document.querySelector("#tab_line").style.transform = 'translate3D(0,0,0)' 
 })
 
-
-let tableDetails= document.querySelector(".table_title")
-
-for (let i = 0; i < document.querySelector(".posts_table tbody").children.length; i++) {
-    let ze = document.querySelector(".posts_table tbody").children[i]
-    ze.addEventListener('click', function () {
-        tableDetails.style.color = "#FFF"
-
-    }) 
-}
-

@@ -12,11 +12,17 @@ function listPosts($currentPage)
 
     $postManager = new \OpenClassrooms\Blog\Model\PostManager(); // Création d'un objet
     $posts = $postManager->getPosts($perPage, $currentPage); // Appel d'une fonction de cet objet
-
-    
     $paging = $postManager->getPaging();
     
+    // Donnée pour la pagination
     $nbPage = ceil($paging['nb_posts'] / $perPage);
+    // Donnée pour définir le folio d'un billet
+    if (isset($_GET['id'])) {
+        $folio =  ($paging['nb_posts']+1) - (($_GET['id'] - 1) * $perPage);
+    } 
+    else {
+        $folio = $paging['nb_posts']+1;
+    }
 
     require('view/frontend/listPostsView.php');
 }

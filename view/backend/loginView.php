@@ -2,18 +2,16 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Page protégée par mot de passe</title>
+        <title>Login</title>
+        <link href="public/css/fonts.css" rel="stylesheet" />
+        <link href="public/css/backend.css" rel="stylesheet" /> 
     </head>
     <body>
         <h1>Login</h1>
-        <form action="login.php?action=loginAdmin" method="post">
-            <p>
-            Identifiant:
-            <input type="username" name="username" />
-            Mot de passe:
-            <input type="password" name="password" />
-            <input type="submit" value="Se connecter" />
-            </p>
+        <form id="login_form" action="login.php?action=loginAdmin" method="post">
+            <input id="username" type="username" name="username" placeholder="Identifiant" />
+            <input id="password" type="password" name="password" placeholder="Mot de passe" />
+            <button type="submit" id="btn_post">Se connecter</button>
         </form>
     </body>
 </html>
