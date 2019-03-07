@@ -1,6 +1,5 @@
 class Formlogin {
     constructor() {
-        this.forms = document.getElementById('reservation_form');
         this.username = document.querySelector('#username');
         this.password = document.querySelector('#password');
         this.errorMessage = document.querySelector('#error_login')
