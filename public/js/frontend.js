@@ -1,21 +1,31 @@
 // Animation au démarrage de la page
-let rightPos = ($(window).width() - ($('#cover h1').offset().left + $('#cover h1').outerWidth()));
+if (sessionStorage.getItem("animation")) {
+	$("#cover").css('display', 'none');
+	
+	$("#bar").delay().animate({ 
+		top: "0",
+	},500);
+} else {
+	let rightPos = ($(window).width() - ($('#cover h1').offset().left + $('#cover h1').outerWidth()));
 
-$("#cover h1").delay(600).animate({ 
-	left: rightPos,
-},2000);
+	$("#cover h1").delay(600).animate({ 
+		left: rightPos,
+	},2000);
 
-$("#cover h1").delay(300).animate({ 
-	top: "-100%",
-},1000);
+	$("#cover h1").delay(300).animate({ 
+		top: "-100%",
+	},1000);
 
-$("#cover").delay(2900).animate({ 
-	top: "-100%",
-},1000).fadeOut();
+	$("#cover").delay(2900).animate({ 
+		top: "-100%",
+	},1000).fadeOut();
 
-$("#bar").delay(3600).animate({ 
-	top: "0",
-},1000);
+	$("#bar").delay(3600).animate({ 
+		top: "0",
+	},1000);
+
+	sessionStorage.setItem('animation', 'skip');
+}
 
 
 
