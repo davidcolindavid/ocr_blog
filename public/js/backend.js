@@ -13,4 +13,3 @@ document.querySelector("#tab_posts").addEventListener('click', function () {
     document.querySelector("#tab_line").style.transition = 'transform 0.3s' 
     document.querySelector("#tab_line").style.transform = 'translate3D(0,0,0)' 
 })
-
