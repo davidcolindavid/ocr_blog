@@ -18,10 +18,9 @@ function loginAdmin($username, $password)
         header('Location: admin.php');
 	}else{
 		// Sinon signale une erreur d'identifiant ou de mot de passe
-		echo "login/password incorrect";
+        require('view/backend/loginView.php');
+        echo '<div id="error_login">Identifiant ou mot de passe incorrect</div>';
 	}
-
-    require('view/backend/loginView.php');
 }
 
 function logout()

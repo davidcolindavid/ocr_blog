@@ -397,7 +397,7 @@ form #password {
 
 #error_login {
     position: fixed;
-    bottom: -100%;
+    bottom: 0;
     width: 100%;
     background: rgb(53, 234, 165);
     text-align: center;
