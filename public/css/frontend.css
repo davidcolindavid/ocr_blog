@@ -419,7 +419,7 @@ footer {
     margin-right: 5px;
 }
 
-.page_item, .page_item_current a {
+.page_item_current {
     box-shadow: rgb(53, 234, 165) 0px -5px 0px inset !important;
     transition: box-shadow 0.3s ease-in-out 0s;
 }

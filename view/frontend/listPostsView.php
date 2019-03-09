@@ -122,7 +122,7 @@ $index = 0
         <div class="pagination_prev col-2">
         <?php
         $prev = $currentPage - 1;
-        if ($prev == 1) {
+        if ($prev != 0) {
             echo "<a href=\"index.php?action=page&amp;id=$prev\"><i class=\"btn_prev fas fa-long-arrow-alt-left\"></i></a>";
         }
         ?>
