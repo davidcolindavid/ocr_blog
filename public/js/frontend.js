@@ -32,11 +32,11 @@ if (sessionStorage.getItem("animation")) {
 
 // Réorganise le DOM pour la mise en page des billets
 // 2 billets dans un même conteneur
-$(".listPostsContainer").append('<div class="row listPostsRow1"></div>');
-$(".listPostsContainer").append('<div class="row listPostsRow2"></div>');
-$(".listPostsRow1").append( $('.section1'), $('.section2') );
-$(".listPostsRow2").append( $('.section3'), $('.section4') );
-$(".contact").insertAfter($(".listPostsRow1"));
+$(".listPostsContainer1").append('<div class="row listPostsRow1"></div>');
+$(".listPostsContainer2").append('<div class="row listPostsRow2"></div>');
+$(".listPostsRow1").append( $('.post1'), $('.post2') );
+$(".listPostsRow2").append( $('.post3'), $('.post4') );
+$(".contact").insertAfter($(".listPostsContainer1"));
 $(".listPostsRow1").append( $('.cache1') );
 $(".listPostsRow2").append( $('.cache2') );
 
@@ -78,29 +78,29 @@ $("#blog_author, #plus .fa-plus").on('click', function () {
 
 
 // Billet au survole
-if ($(".section2").length) {
-	document.querySelector(".section2").addEventListener('mouseover', function () {
+if ($(".post2").length) {
+	document.querySelector(".post2").addEventListener('mouseover', function () {
 		document.querySelector(".cache1").style.transition = 'transform 0.3s' 
 		document.querySelector(".cache1").style.transform = 'translate3D(100%,0,0)' 
 	})
 }
 
-if ($(".section1").length) {
-	document.querySelector(".section1").addEventListener('mouseover', function () {
+if ($(".post1").length) {
+	document.querySelector(".post1").addEventListener('mouseover', function () {
 		document.querySelector(".cache1").style.transition = 'transform 0.3s' 
 		document.querySelector(".cache1").style.transform = 'translate3D(0,0,0)' 
 	})
 }
 
-if ($(".section4").length) {
-	document.querySelector(".section4").addEventListener('mouseover', function () {
+if ($(".post4").length) {
+	document.querySelector(".post4").addEventListener('mouseover', function () {
 		document.querySelector(".cache2").style.transition = 'transform 0.3s' 
 		document.querySelector(".cache2").style.transform = 'translate3D(100%,0,0)' 
 	})
 }
 
-if ($(".section3").length) {
-	document.querySelector(".section3").addEventListener('mouseover', function () {
+if ($(".post3").length) {
+	document.querySelector(".post3").addEventListener('mouseover', function () {
 		document.querySelector(".cache2").style.transition = 'transform 0.3s' 
 		document.querySelector(".cache2").style.transform = 'translate3D(0,0,0)' 
 	})

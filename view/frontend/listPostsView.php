@@ -6,8 +6,8 @@
 $index = 0
 ?>
 
-
-<div class="blog_intro">
+<!-- Description du blog -->
+<section class="blog_intro">
     <div class="container-fluid">
         <div class="row">
             <div id="blog_author" class="col-10"><h2>Roman de Jean Forteroche</h2></div>
@@ -22,101 +22,103 @@ $index = 0
             </div>
         </div>
     </div>
-</div>
-
-<section class="container-fluid">
-    <div class="row listPostsContainer">
-        <div class="cache1"></div>
-        <div class="cache2"></div>
-    <?php
-    while ($data = $posts->fetch())
-    
-    {
-    ?>
-        <?php $index = $index + 1 ?>
-        <div class="section<?= $index ?> col-lg-6">
-            <div class="row content_top col-lg-12">
-                <div class="title col-lg-12" >
-                    <h3>
-                    <a href="index.php?action=post&amp;id=<?= $data['id'] ?>"><?= $data['title'] ?></a>
-                    </h3>
-                </div>
-            </div>
-        
-            <div class="col-lg-12">                
-                <div class="row">
-                    <div class="post_content offset-md-1 col-md-10">
-                        <div class="content" >
-                            <?php 
-                            // Récupérer une portion de notre contenu
-                            $extrait = substr($data['content'], 0, 950);
-                            // Trouver le dernier espace après le dernier mot de $extrait
-                            $espace = strrpos($extrait, ' ');
-                            // Récuperer une portion de notre $extrait en prennant en charge le dernier espace
-                            echo substr($extrait, 0, $espace) . ' <a href="index.php?action=post&amp;id=' . $data['id'] . '">...</a>';
-                            ?>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-
-            <div class="row content_bottom col-lg-12">
-                <div class="folio col-lg-12" >
-                <?php
-                    $folio = $folio -1;
-                    echo ($folio);
-                ?>
-                </div>
-                <div class="post_content_date col-6">
-                    <p><?= $data['creation_date_fr'] ?></p>
-                </div>
-
-                <div class="post_content_read_more col-6">
-                    <p><a href="index.php?action=post&amp;id=<?= $data['id'] ?>">lire plus</a></p>
-                </div>
-            </div>
-
-        </div>
-            
-
-    <?php
-    }
-    $posts->closeCursor();
-    ?>
-    </div>
-
-    <div class="contact">
-        <div class="contact_container">
-        
-            <div class="contact_link">
-                <div class="contact_col1">
-                    <div id="contact_text">Me laisser un message</div>
-                </div>
-
-                <div class="contact_col2">
-                    <div id="btn_contact">Contact</div>
-                </div>
-            </div>
-
-            <form class="contact_send">
-                <div class="contact_col3">
-                    <input type="text" name="email" id="email" placeholder="Email">
-                    <textarea id="message" name="message" placeholder="Votre message"></textarea>
-                </div>
-
-                <div class="contact_col4">
-                    <button id="btn_send">Envoyer</button>
-                </div>
-            </form>
-
-        </div>
-
-    </div>
-
 </section>
 
 
+<!-- Container des deux premiers billets de la page -->
+<section class="container-fluid listPostsContainer1">
+    <div class="cache1"></div>
+</section>
+
+<!-- Container des deux derniers billets de la page -->
+<section class="container-fluid listPostsContainer2">
+    <div class="cache2"></div>
+</section>
+
+<!-- Récupération des données des billets -->
+<?php
+while ($data = $posts->fetch())    
+{
+?>
+<?php $index = $index + 1 ?>
+    <div class="post<?= $index ?> col-lg-6">
+        <div class="row content_top col-lg-12">
+            <div class="title col-lg-12" >
+                <h3>
+                <a href="index.php?action=post&amp;id=<?= $data['id'] ?>"><?= $data['title'] ?></a>
+                </h3>
+            </div>
+        </div>
+        
+        <div class="col-lg-12">                
+            <div class="row">
+                <div class="post_content offset-md-1 col-md-10">
+                    <div class="content" >
+                        <?php 
+                        // Récupérer une portion de notre contenu
+                        $extrait = substr($data['content'], 0, 950);
+                        // Trouver le dernier espace après le dernier mot de $extrait
+                        $espace = strrpos($extrait, ' ');
+                        // Récuperer une portion de notre $extrait en prennant en charge le dernier espace
+                        echo substr($extrait, 0, $espace) . ' <a href="index.php?action=post&amp;id=' . $data['id'] . '">...</a>';
+                        ?>
+                    </div>
+                        
+                </div>
+            </div>
+        </div>
+
+        <div class="row content_bottom col-lg-12">
+            <div class="folio col-lg-12" >
+            <?php
+                $folio = $folio -1;
+                echo ($folio);
+            ?>
+            </div>
+            <div class="post_content_date col-6">
+                <p><?= $data['creation_date_fr'] ?></p>
+            </div>
+
+            <div class="post_content_read_more col-6">
+                <p><a href="index.php?action=post&amp;id=<?= $data['id'] ?>">lire plus</a></p>
+            </div>
+         </div>
+
+    </div>
+<?php
+}
+$posts->closeCursor();
+?>
+
+<!-- Slider contact -->
+<section class="contact">
+    <div class="contact_container">
+        
+        <div class="contact_link">
+            <div class="contact_col1">
+                <div id="contact_text">Me laisser un message</div>
+            </div>
+
+            <div class="contact_col2">
+                <div id="btn_contact">Contact</div>
+            </div>
+        </div>
+
+        <form class="contact_send">
+            <div class="contact_col3">
+                <input type="text" name="email" id="email" placeholder="Email">
+                <textarea id="message" name="message" placeholder="Votre message"></textarea>
+            </div>
+
+            <div class="contact_col4">
+                <button id="btn_send">Envoyer</button>
+            </div>
+        </form>
+
+    </div>
+</section>
+
+<!-- Pagination -->
 <footer class="container-fluid">
     <div class="row">
         <div class="pagination_prev col-2">

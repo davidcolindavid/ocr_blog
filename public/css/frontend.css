@@ -220,7 +220,7 @@ h3 a:hover {
         visibility: hidden;
     }
 
-    .section2, .section4 {
+    .post2, .post4 {
         background: #f2F2F2;
     }
 }
@@ -420,8 +420,9 @@ footer {
 }
 
 .page_item_current {
-    box-shadow: rgb(53, 234, 165) 0px -5px 0px inset !important;
-    transition: box-shadow 0.3s ease-in-out 0s;
+    background: rgb(53, 234, 165);
+    border-radius: 5px;
+    color: #000;
 }
 
 
