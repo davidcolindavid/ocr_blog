@@ -43,12 +43,31 @@ function addComment($postId, $author, $comment)
     $commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
 
     $affectedLines = $commentManager->postComment($postId, $author, $comment);
+    $lastComment = $commentManager->getComment($_GET['id']);
 
-    if ($affectedLines === false) {
-        throw new Exception('Impossible d\'ajouter le commentaire !');
+    if (isAjax()) { 
+    ?>
+        <div class="row">
+            <div class="col-7 comment_details"><?= htmlspecialchars($lastComment['author']) ?>, <?= $lastComment['comment_date_fr'] ?></div>
+            <form class="col-5 col_report" action="index.php?action=reportComment&amp;id=<?= $lastComment['id'] ?>&amp;postId=<?= $lastComment['post_id'] ?>" method="post">
+                <button type="submit" class="btn_report">Signaler</button>
+            </form>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="comment_sent"><?= nl2br(htmlspecialchars($lastComment['comment'])) ?></div>
+            </div>
+        </div>
+    <?php
     }
     else {
-        header('Location: index.php?action=post&id=' . $postId);
+        if ($affectedLines === false) {
+            throw new Exception('Impossible d\'ajouter le commentaire !');
+        }
+        else {
+            header('Location: index.php?action=post&id=' . $postId);
+        }
     }
 }
 
@@ -64,4 +83,9 @@ function reportComment($commentId, $postId)
     else {
         header('Location: index.php?action=post&id=' . $postId);
     }
+}
+
+function isAjax()
+{
+    return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
 }

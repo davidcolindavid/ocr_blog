@@ -15,6 +15,16 @@ class CommentManager extends Manager
         return $comments;
     }
 
+    public function getComment($postId)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%i\') AS comment_date_fr FROM comments WHERE post_id = ? ORDER BY comment_date DESC LIMIT 1');
+        $req->execute(array($postId));
+        $lastComment = $req->fetch();
+
+        return $lastComment;
+    }
+
     public function postComment($postId, $author, $comment)
     {
         $db = $this->dbConnect();

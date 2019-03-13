@@ -1,13 +1,15 @@
+// verifier et ajouter un commentaire
 class FormComment {
     constructor() {
         this.author = document.querySelector('#author');
         this.comment = document.querySelector('#comment');
         self = this;
 
+        this.check();
         this.send();
     }
 
-    send() {
+    check() {
         // Clique sur sur le btn envoyer
         document.querySelector('#btn_send').addEventListener('click', function (e) {
             // Si les champs author et comment ne sont pas remplis
@@ -29,8 +31,45 @@ class FormComment {
             }
         })
     }
+
+    send() {
+        $(".container_comment_form").on('submit', '.comment_form', function(e) {
+            e.preventDefault();
+            let form = $(this);
+            let url = form.attr('action');
+            
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serializeArray(),
+              })
+                .done(function(data, text, jqxhr) {
+                    $('<div class="single_comment"></div>').prependTo('.container_comments').hide();
+                    $('.container_comments').find(':first').prepend(jqxhr.responseText);
+                    $('.container_comments').find(':first').slideDown()
+                    $(".comment_form")[0].reset()
+                })
+        });
+    }
 }
 
 if ($('.comment_form').length) {
     let formComment = new FormComment ()
 }
+
+
+// signaler un commentaire
+$(".container_comments").on('submit', '.col_report', function(e) {
+    e.preventDefault();
+    let form = $(this);
+    let url = form.attr('action');
+    
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: form.serializeArray(),
+        success: function() {
+            form.find(':first').fadeOut(100);
+        },
+      })
+});

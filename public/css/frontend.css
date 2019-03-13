@@ -595,7 +595,8 @@ footer {
 
 .container_comments .comment_details {
     font-size: 0.6em;
-    padding-top: 9px;
+    padding-top: 11px;
+    padding-bottom: 6px;
 }
 
 @media all and (max-width: 768px)
