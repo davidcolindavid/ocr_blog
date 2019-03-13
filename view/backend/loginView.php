@@ -13,6 +13,9 @@
             <input id="password" type="password" name="password" placeholder="Mot de passe" />
             <button type="submit" id="btn_login">Se connecter</button>
         </form>
+        <div id="error_login">Identifiant ou mot de passe incorrect</div>
+        
+        <script src="https://code.jquery.com/jquery.min.js" ></script>
         <script src="public/js/login.js"></script>
     </body>
 </html>

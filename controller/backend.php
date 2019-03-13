@@ -15,11 +15,10 @@ function loginAdmin($username, $password)
         session_start();
         $_SESSION['correctPassword'] = $correctPassword;
         $_SESSION['pseudo'] = $username;
-        header('Location: admin.php');
+        echo "success";
 	}else{
 		// Sinon signale une erreur d'identifiant ou de mot de passe
-        require('view/backend/loginView.php');
-        echo '<div id="error_login">Identifiant ou mot de passe incorrect</div>';
+        echo "fail";
 	}
 }
 

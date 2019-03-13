@@ -396,6 +396,7 @@ form #password {
 }
 
 #error_login {
+    display: none;
     position: fixed;
     bottom: 0;
     width: 100%;
