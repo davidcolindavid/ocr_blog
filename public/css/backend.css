@@ -34,6 +34,10 @@ p {
     background: none;
 }
 
+*:focus { /* bordure input chrome */
+    outline: none;
+}
+
 /**********************************
 ************** ADMIN **************
 **********************************/
@@ -159,9 +163,11 @@ header #btn_logout {
 .admin_post_title:focus::placeholder { opacity: 0 !important; } /* Modern Browsers */
 
 #btn_post, #btn_login {
-    width: 300px;
+    display: inline-block;
     margin: 30px 0 30px 0;
     padding: 15px;
+    padding-left: 50px;
+    padding-right: 50px;
     color: #000;
     background: rgb(53, 234, 165);
     font-family: 'NeueHaasGroteskBold', Helvetica, Arial, sans-serif;
