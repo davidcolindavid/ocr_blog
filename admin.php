@@ -3,7 +3,7 @@ session_start();
 require('controller/backend.php');
 
 try { // On essaie de faire des choses
-    if (isset($_SESSION['correctPassword']) AND isset($_SESSION['pseudo'])) {
+    if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])) {
         if (isset($_GET['action'])) {
             if ($_GET['action'] == 'listPosts') {
                 ListPostsComments();

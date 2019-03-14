@@ -9,15 +9,17 @@ function loginAdmin($username, $password)
 {   
     $loginManager = new \OpenClassrooms\Blog\Model\LoginManager(); // Création d'un objet
     $correctPassword = $loginManager->getPass($username, $password); // Appel d'une fonction de cet objet
+    $user =  $loginManager->getUser($username);
 
     if($correctPassword){
-        // Si oui redirige vers la page admin
+        // Si mot de passe correct, création de session
         session_start();
-        $_SESSION['correctPassword'] = $correctPassword;
+        $_SESSION['id'] = $user['id'];
         $_SESSION['pseudo'] = $username;
+        // redirige vers la page admin avec ajax backend.js
         echo "success";
 	}else{
-		// Sinon signale une erreur d'identifiant ou de mot de passe
+		// Sinon signale une erreur d'identifiant ou de mot de passe avec ajax backend.js
         echo "fail";
 	}
 }
