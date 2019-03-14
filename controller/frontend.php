@@ -45,21 +45,17 @@ function addComment($postId, $author, $comment)
     $affectedLines = $commentManager->postComment($postId, $author, $comment);
     $lastComment = $commentManager->getComment($_GET['id']);
 
-    if (isAjax()) { 
-    ?>
-        <div class="row">
-            <div class="col-7 comment_details"><?= htmlspecialchars($lastComment['author']) ?>, <?= $lastComment['comment_date_fr'] ?></div>
-            <form class="col-5 col_report" action="index.php?action=reportComment&amp;id=<?= $lastComment['id'] ?>&amp;postId=<?= $lastComment['post_id'] ?>" method="post">
-                <button type="submit" class="btn_report">Signaler</button>
-            </form>
-        </div>
+    $lastCommentId = $lastComment['id'];
+    $lastCommentAuthor = htmlspecialchars($lastComment['author']);
+    $lastCommentDate = $lastComment['comment_date_fr'];
+    $lastCommentContent = nl2br(htmlspecialchars($lastComment['comment']));
 
-        <div class="row">
-            <div class="col-12">
-                <div class="comment_sent"><?= nl2br(htmlspecialchars($lastComment['comment'])) ?></div>
-            </div>
-        </div>
-    <?php
+    if (isAjax()) { 
+        $array = [$lastCommentId, $lastCommentAuthor, $lastCommentDate, $lastCommentContent, $postId];
+        // J'indique au navigateur que je retourne du JSON
+        header('Content-type: application/json');
+        // Je transforme mon tableau en JSON et je l'imprime dans le body de ma réponse
+        echo json_encode($array);
     }
     else {
         if ($affectedLines === false) {

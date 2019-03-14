@@ -162,7 +162,7 @@ header #btn_logout {
 .admin_post_title:focus:-ms-input-placeholder { opacity: 0 !important; } /* IE 10+ */
 .admin_post_title:focus::placeholder { opacity: 0 !important; } /* Modern Browsers */
 
-#btn_post, #btn_login {
+#btn_post, #btn_cancel, #btn_login {
     display: inline-block;
     margin: 30px 0 30px 0;
     padding: 15px;
@@ -179,7 +179,13 @@ header #btn_logout {
     transition: 0.3s ease-in-out 0s;
 }
 
+#btn_cancel {
+    background: #F2F2F2;
+    margin-left: 15px;
+}
+
 #btn_post:hover,
+#btn_cancel:hover,
 #btn_login:hover {
     box-shadow: 0 6px 6px 0 rgba(0,0,0,0.26), 0 10px 20px 0 rgba(0,0,0,0.19);
     -webkit-box-shadow: 0 6px 6px 0 rgba(0,0,0,0.26), 0 10px 20px 0 rgba(0,0,0,0.19);
@@ -325,6 +331,10 @@ header #btn_logout {
     font-family: 'fontawesome', Arial, sans-serif;
     text-align: center;
     cursor: pointer;
+}
+
+.table_report_0 {
+    cursor: auto;
 }
 
 .table_eye {

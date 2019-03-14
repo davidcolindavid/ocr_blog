@@ -42,12 +42,22 @@ class FormComment {
                 type: "POST",
                 url: url,
                 data: form.serializeArray(),
-              })
+                dataType: 'JSON',
+            })
                 .done(function(data, text, jqxhr) {
                     $('<div class="single_comment"></div>').prependTo('.container_comments').hide();
-                    $('.container_comments').find(':first').prepend(jqxhr.responseText);
+                    // Ajoute la row contenant l'auteur et le bouton signaler
+                    $('.container_comments').find(':first').append('<div class="row"></row>');
+                    $('.container_comments').find(':first .row').append('<div class="col-7 comment_details">' + data[1] + ', ' + data[2] + '</div>');
+                    $('.container_comments').find(':first .row').append('<form class="col-5 col_report" action="index.php?action=reportComment&amp;id=' + data[0] + '&amp;postId=' + data[4] + '" method="post"></form>');
+                    $('.container_comments').find(':first form').append('<button type="submit" class="btn_report">Signaler</button>');
+                    // Ajoute la row contenant le message
+                    $('.container_comments').find(':first').append('<div class="row"></row>');
+                    $('.container_comments').find(':first .row:eq(1)').append('<div class="col-12"><div class="comment_sent">' + data[3] + '</div></div>');
+
                     $('.container_comments').find(':first').slideDown()
                     $(".comment_form")[0].reset()
+                    
                 })
         });
     }

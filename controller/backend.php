@@ -42,6 +42,10 @@ function listPostsComments()
     $comments = $commentManager->getComments();
     $commentsReported = $commentManager->getCommentsReported();
 
+    $formTitle = "";
+    $formContent = "Exprimez-vous";
+    $formAction = "admin.php?action=addPost";
+
     require('view/backend/adminView.php');
 }
 
@@ -49,12 +53,26 @@ function addPost()
 {
     $postManager = new \OpenClassrooms\Blog\Model\AdminPostManager();
     $affectedLines = $postManager->postToAdd();
+    $lastpost = $postManager->getLastPost();
 
-    if ($affectedLines === false) {
-        throw new Exception('Impossible d\'ajouter le commentaire !');
+    $lastPostId = $lastpost['id'];
+    $lastPostTitle = $lastpost['title'];
+    $lastPostDate = $lastpost['creation_date_fr'];
+
+    if (isAjax()) { 
+        $array = [$lastPostId, $lastPostTitle, $lastPostDate];
+        // J'indique au navigateur que je retourne du JSON
+        header('Content-type: application/json');
+        // Je transforme mon tableau en JSON et je l'imprime dans le body de ma réponse
+        echo json_encode($array);
     }
     else {
-        header('Location: admin.php');
+        if ($affectedLines === false) {
+            throw new Exception('Impossible d\'ajouter le commentaire !');
+        }
+        else {
+            header('Location: admin.php');
+        }
     }
 }
 
@@ -68,19 +86,42 @@ function editPost()
     $comments = $commentManager->getComments();
     $commentsReported = $commentManager->getCommentsReported();
 
-    require('view/backend/adminView.php');
+    $formTitle = $form['title'];
+    $formContent = $form['content'];
+    $formAction = "admin.php?action=updatePost&id=" . $form['id'];
+
+    if (isAjax()) { 
+        $array = [$formTitle, $formContent, $formAction];
+        // J'indique au navigateur que je retourne du JSON
+        header('Content-type: application/json');
+        // Je transforme mon tableau en JSON et je l'imprime dans le body de ma réponse
+        echo json_encode($array);
+    }
+    else {
+        require('view/backend/adminView.php');
+    }
 }
 
 function updatePost($postId, $title, $content)
 {
     $postManager = new \OpenClassrooms\Blog\Model\AdminPostManager();
     $affectedLines = $postManager->PostToUpdate($postId, $title, $content);
+    $post = $postManager->getPost($postId);
 
-    if ($affectedLines === false) {
-        throw new Exception('Impossible de mettre à jour le billet !');
+    if (isAjax()) { 
+        $array = [$post['title']];
+        // J'indique au navigateur que je retourne du JSON
+        header('Content-type: application/json');
+        // Je transforme mon tableau en JSON et je l'imprime dans le body de ma réponse
+        echo json_encode($array);
     }
     else {
-        header('Location: admin.php');
+        if ($affectedLines === false) {
+            throw new Exception('Impossible de mettre à jour le billet !');
+        }
+        else {
+            header('Location: admin.php');
+        }
     }
 }
 
@@ -127,4 +168,9 @@ function cancelReportComment()
     else {
         header('Location: admin.php');
     }
+}
+
+function isAjax()
+{
+    return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
 }

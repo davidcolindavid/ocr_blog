@@ -16,27 +16,12 @@
                     <div id="btn_logout"><a href="admin.php?action=logout"><i class="fas fa-times"></i></a></div>
                 </nav>
             </header>
-            
-            <?php 
-            if (isset($_GET['action']) == 'editPost') {
-                if (isset($_GET['id']) && $_GET['id'] > 0) {
-                    $formTitle = $form['title'];
-                    $formContent = $form['content'];
-                    $formAction = "admin.php?action=updatePost&amp;id=" . $form['id'];
-                }
-                
-            }
-            else {
-                $formTitle = "";
-                $formContent = "Exprimez-vous";
-                $formAction = "admin.php?action=addPost";
-            }
-            ?>
 
-            <form action="<?= $formAction ?>" method="post" class="admin_post_form">
+            <form action="<?= $formAction ?>" method="post" class="admin_post_form add_post">
                 <input type="text" class="admin_post_title" name="post_title" placeholder="Saisissez votre titre ici" value="<?= htmlspecialchars($formTitle) ?>" />
                 <textarea id="post_content" name="post_content" ><?= $formContent ?></textarea>
                 <button type="submit" id="btn_post">Envoyer</button>
+                <button type="button" id="btn_cancel">Annuler</button>
             </form>
 
             <div id="tabs">
@@ -78,7 +63,7 @@
 
                 <div id ="comments_container">
 
-                    <table class="comments_table" >
+                    <table class="comments_table comments_table_report_1" >
                         <tbody>
                         <?php
                         // Affichage de chaque message (toutes les données sont protégées par htmlspecialchars)
@@ -86,7 +71,7 @@
                         {
                         ?>
                             <tr>
-                                <td class="table_report"><a href="admin.php?action=cancelReportComment&amp;id=<?= $commentReported['id'] ?>"><i class="fas fa-flag"></i></a></td>
+                                <td class="table_report table_report_1"><a href="admin.php?action=cancelReportComment&amp;id=<?= $commentReported['id'] ?>"><i class="fas fa-flag"></i></a></td>
                                 <td class="table_delete"><a href="admin.php?action=deleteComment&amp;id=<?= $commentReported['id'] ?>"><i class="fas fa-times"></i></a></td>
                                 <td class="table_eye"><a href="index.php?action=post&amp;id=<?= $commentReported['post_id'] ?>" target="_blank"><i class="far fa-eye"></i></a></td>
                                 <td class="table_comment">
@@ -100,7 +85,7 @@
                         </tbody>
                     </table>  
 
-                    <table class="comments_table" >
+                    <table class="comments_table comments_table_report_0" >
                         <tbody>
                         <?php
                         // Affichage de chaque message (toutes les données sont protégées par htmlspecialchars)
@@ -108,7 +93,7 @@
                         {
                         ?>
                             <tr>
-                                <td class="table_report"><i class="far fa-flag"></td>
+                                <td class="table_report table_report_0"><i class="far fa-flag"></td>
                                 <td class="table_delete"><a href="admin.php?action=deleteComment&amp;id=<?= $comment['id'] ?>"><i class="fas fa-times"></i></a></td>
                                 <td class="table_eye"><a href="index.php?action=post&amp;id=<?= $comment['post_id'] ?>" target="_blank"><i class="far fa-eye"></i></a></td>
                                 <td class="table_comment">
@@ -138,6 +123,7 @@
                 ]
             });
         </script>
+        <script src="https://code.jquery.com/jquery.min.js" ></script>
         <script src="public/js/backend.js"></script>
     </body>
 </html>
