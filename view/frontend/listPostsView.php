@@ -6,7 +6,7 @@
 $index = 0
 ?>
 
-<!-- Description du blog -->
+<!-- about the blog -->
 <section class="blog_intro">
     <div class="container-fluid">
         <div class="row">
@@ -25,17 +25,17 @@ $index = 0
 </section>
 
 
-<!-- Container des deux premiers billets de la page -->
+<!-- container of the first two posts -->
 <section class="container-fluid listPostsContainer1">
     <div class="cache1"></div>
 </section>
 
-<!-- Container des deux derniers billets de la page -->
+<!-- container of the last two posts -->
 <section class="container-fluid listPostsContainer2">
     <div class="cache2"></div>
 </section>
 
-<!-- Récupération des données des billets -->
+<!-- get the posts -->
 <?php
 while ($data = $posts->fetch())    
 {
@@ -55,12 +55,16 @@ while ($data = $posts->fetch())
                 <div class="post_content offset-md-1 col-md-10">
                     <div class="content" >
                         <?php 
-                        // Récupérer une portion de notre contenu
-                        $extrait = substr($data['content'], 0, 950);
-                        // Trouver le dernier espace après le dernier mot de $extrait
-                        $espace = strrpos($extrait, ' ');
-                        // Récuperer une portion de notre $extrait en prennant en charge le dernier espace
-                        echo substr($extrait, 0, $espace) . ' <a href="index.php?action=post&amp;id=' . $data['id'] . '">...</a>';
+                        // get an extract of the post (950 characters)
+                        $extract = substr($data['content'], 0, 950);
+                        // find the last space after the last word $extract
+                        $space = strrpos($extract, ' ');
+                        // get the $extract including the last space
+                        if (strlen($extract) < 950) {
+                            echo $extract;
+                        } else {
+                            echo substr($extract, 0, $space) . ' <a href="index.php?action=post&amp;id=' . $data['id'] . '">...</a>';
+                        }
                         ?>
                     </div>
                         
@@ -71,6 +75,7 @@ while ($data = $posts->fetch())
         <div class="row content_bottom col-lg-12">
             <div class="folio col-lg-12" >
             <?php
+                // number of the post
                 $folio = $folio -1;
                 echo ($folio);
             ?>
@@ -90,7 +95,7 @@ while ($data = $posts->fetch())
 $posts->closeCursor();
 ?>
 
-<!-- Slider contact -->
+<!-- slider contact -->
 <section class="contact">
     <div class="contact_container">
         
@@ -118,11 +123,12 @@ $posts->closeCursor();
     </div>
 </section>
 
-<!-- Pagination -->
+<!-- pagination -->
 <footer class="container-fluid">
     <div class="row">
         <div class="pagination_prev col-2">
         <?php
+        // go to previous page
         $prev = $currentPage - 1;
         if ($prev != 0) {
             echo "<a href=\"index.php?action=page&amp;id=$prev\"><i class=\"btn_prev fas fa-long-arrow-alt-left\"></i></a>";
@@ -132,6 +138,7 @@ $posts->closeCursor();
 
         <div class="pagination_pages col-8">
         <?php
+        // pages links
         for ($i = 1; $i <= $nbPage; $i++) {
             if ($i == $currentPage) {
                 echo "<div class=\"page_item_current\">$i</div>";
@@ -145,6 +152,7 @@ $posts->closeCursor();
 
         <div class="pagination_next col-2">
         <?php
+        // go to next page
         $next = $currentPage + 1;
         if ($next <= $nbPage) {
             echo "<a href=\"index.php?action=page&amp;id=$next\"><i class=\"btn_next fas fa-long-arrow-alt-right\"></i></a>";

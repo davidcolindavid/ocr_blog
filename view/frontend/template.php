@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="utf-8" />
         <title><?= $title ?></title>
@@ -11,18 +11,19 @@
     </head>
         
     <body>
-        
-            <header id="cover">
-                <div id="main_title">
-                    <h1>Billet simple pour l'Alaska</h1>
-                </div>
-            </header>
+        <!-- animated title -->
+        <header id="cover">
+            <div id="main_title">
+                <h1>Billet simple pour l'Alaska</h1>
+            </div>
+        </header>
 
-            <header id="bar">
-                <h1><a href="index.php">Billet simple pour l'Alaska</a></h1>
-            </header>
+        <!-- topbar -->
+        <header id="bar">
+            <h1><a href="index.php">Billet simple pour l'Alaska</a></h1>
+        </header>
 
-            <?= $content ?>
+        <?= $content ?>
         
         <script src="https://code.jquery.com/jquery.min.js" ></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

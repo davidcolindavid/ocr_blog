@@ -2,6 +2,7 @@
 
 <?php ob_start(); ?>
 
+<!-- links -->
 <div class="container container_single_post">
     <div class="row single_post_top">
         <div class="back col-6">
@@ -13,7 +14,7 @@
     </div>
 </div>
     
-
+<!-- single post -->
 <section class="single_post">
     <div class="container">
         <div class="row">
@@ -33,6 +34,7 @@
 </section>
 
 <section>
+    <!-- comment form -->
     <div class="container-fluid container_comment_form">
         <form class="row comment_form" action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
             <div class="col-lg-6">
@@ -46,13 +48,14 @@
         </form>
     </div>
 
-    
+    <!-- get the the comments -->
     <div class="container container_comments">
         <?php
         while ($comment = $comments->fetch())
         {
         ?>
-            <div class="single_comment">
+        <div class="single_comment">
+            <!-- name + date + report btn -->
             <div class="row">
                 <div class="col-7 comment_details"><?= htmlspecialchars($comment['author']) ?>, <?= $comment['comment_date_fr'] ?></div>
                 <form class="col-5 col_report" action="index.php?action=reportComment&amp;id=<?= $comment['id'] ?>&amp;postId=<?= $comment['post_id'] ?>" method="post">
@@ -60,6 +63,7 @@
                 </form>
             </div>
 
+            <!-- message -->
             <div class="row">
                 <div class="col-12">
                     <div class="comment_sent"><?= nl2br(htmlspecialchars($comment['comment'])) ?></div>
