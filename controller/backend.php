@@ -1,25 +1,24 @@
 <?php
 
-// Chargement des classes
+// load the classes
 require_once('model/loginManager.php');
 require_once('model/AdminPostManager.php');
 require_once('model/AdminCommentManager.php');
 
 function loginAdmin($username, $password)
 {   
-    $loginManager = new \OpenClassrooms\Blog\Model\LoginManager(); // Création d'un objet
-    $correctPassword = $loginManager->getPass($username, $password); // Appel d'une fonction de cet objet
+    $loginManager = new \OpenClassrooms\Blog\Model\LoginManager(); // creation of an object
+    $correctPassword = $loginManager->getPass($username, $password); // call a function of this object
     $user =  $loginManager->getUser($username);
 
     if($correctPassword){
-        // Si mot de passe correct, création de session
         session_start();
         $_SESSION['id'] = $user['id'];
         $_SESSION['pseudo'] = $username;
-        // redirige vers la page admin avec ajax backend.js
+        // redirect to the admin page width ajax (backend.js)
         echo "success";
 	}else{
-		// Sinon signale une erreur d'identifiant ou de mot de passe avec ajax backend.js
+		// Report an error: wrong id or password width ajax (backend.js)
         echo "fail";
 	}
 }
@@ -28,7 +27,6 @@ function logout()
 {   
     session_start();
     
-    // Suppression des variables de session et de la session
     $_SESSION = array();
     session_destroy();
 
@@ -37,13 +35,14 @@ function logout()
 
 function listPostsComments()
 {
-    $postManager = new \OpenClassrooms\Blog\Model\AdminPostManager(); // Création d'un objet
-    $posts = $postManager->getPosts(); // Appel d'une fonction de cet objet
+    $postManager = new \OpenClassrooms\Blog\Model\AdminPostManager();
+    $posts = $postManager->getPosts();
     
     $commentManager = new \OpenClassrooms\Blog\Model\AdminCommentManager();
     $comments = $commentManager->getComments();
     $commentsReported = $commentManager->getCommentsReported();
 
+    // editor and fields init
     $formTitle = "";
     $formContent = "Exprimez-vous";
     $formAction = "admin.php?action=addPost";
@@ -57,16 +56,15 @@ function addPost()
     $affectedLines = $postManager->postToAdd();
     $lastpost = $postManager->getLastPost();
 
+    // editor and fields init
     $lastPostId = $lastpost['id'];
     $lastPostTitle = $lastpost['title'];
     $lastPostDate = $lastpost['creation_date_fr'];
 
     if (isAjax()) { 
         $array = [$lastPostId, $lastPostTitle, $lastPostDate];
-        // J'indique au navigateur que je retourne du JSON
         header('Content-type: application/json');
-        // Je transforme mon tableau en JSON et je l'imprime dans le body de ma réponse
-        echo json_encode($array);
+        echo json_encode($array); // transform the array into JSON
     }
     else {
         if ($affectedLines === false) {
@@ -80,23 +78,22 @@ function addPost()
 
 function editPost()
 {   
-    $postManager = new \OpenClassrooms\Blog\Model\AdminPostManager(); // Création d'un objet
-    $posts = $postManager->getPosts(); // Appel d'une fonction de cet objet
+    $postManager = new \OpenClassrooms\Blog\Model\AdminPostManager();
+    $posts = $postManager->getPosts();
     $form = $postManager->postToEdit($_GET['id']);
 
     $commentManager = new \OpenClassrooms\Blog\Model\AdminCommentManager();
     $comments = $commentManager->getComments();
     $commentsReported = $commentManager->getCommentsReported();
 
+    // editor and fields init
     $formTitle = $form['title'];
     $formContent = $form['content'];
     $formAction = "admin.php?action=updatePost&id=" . $form['id'];
 
     if (isAjax()) { 
         $array = [$formTitle, $formContent, $formAction];
-        // J'indique au navigateur que je retourne du JSON
         header('Content-type: application/json');
-        // Je transforme mon tableau en JSON et je l'imprime dans le body de ma réponse
         echo json_encode($array);
     }
     else {
@@ -112,9 +109,7 @@ function updatePost($postId, $title, $content)
 
     if (isAjax()) { 
         $array = [$post['title']];
-        // J'indique au navigateur que je retourne du JSON
         header('Content-type: application/json');
-        // Je transforme mon tableau en JSON et je l'imprime dans le body de ma réponse
         echo json_encode($array);
     }
     else {

@@ -12,10 +12,6 @@ body, html {
     color: #000 !important;
 }
 
-body {
-    overflow-x: hidden;
-}
-
 h1, h2, h3 {
     text-align:center;
 }
@@ -234,8 +230,10 @@ header #btn_logout {
 
 @media all and (max-width: 768px)
 {
-	#btn_post {
+	#btn_post, #btn_cancel {
         font-size: 1.5em;
+        padding-left: 30px;
+        padding-right: 30px;
     }
 }
 
@@ -259,6 +257,7 @@ header #btn_logout {
 
 #tab_line {
     position: absolute;
+    left: 0;
     bottom: -4px;
     z-index: 100;
     width: 50%;
@@ -275,11 +274,17 @@ header #btn_logout {
 
 /************ section ************/
 
+#admin {
+    width: 100%;
+    background: #fff;
+    font-family: 'NeueHaasGroteskMedium', Helvetica, Arial, sans-serif;
+    overflow: hidden;
+}
+
 #admin_container {
     width: 200%;
     display: flex;
-    background: #fff;
-    font-family: 'NeueHaasGroteskMedium', Helvetica, Arial, sans-serif;
+    overflow: hidden;
 }
 
 #posts_container, 
@@ -432,9 +437,19 @@ form #password {
 	form #username,
     form #password {
         font-size: 1.5em;
+        -webkit-appearance: none;
     }
 
     #error_login {
         font-size: 1.5em;
+    }
+}
+
+@media all and (max-width: 768px)
+{
+	#btn_login {
+        font-size: 1.5em;
+        padding-left: 30px;
+        padding-right: 30px;
     }
 }

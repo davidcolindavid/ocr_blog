@@ -1,4 +1,4 @@
-// Animation au démarrage de la page
+// Entrance Animation
 if (sessionStorage.getItem("animation")) {
 	$("#cover").css('display', 'none');
 	
@@ -28,10 +28,8 @@ if (sessionStorage.getItem("animation")) {
 }
 
 
-
-
-// Réorganise le DOM pour la mise en page des billets
-// 2 billets dans un même conteneur
+// Modify the DOM
+// 2 posts in the same container
 $(".listPostsContainer1").append('<div class="row listPostsRow1"></div>');
 $(".listPostsContainer2").append('<div class="row listPostsRow2"></div>');
 $(".listPostsRow1").append( $('.post1'), $('.post2') );
@@ -41,8 +39,7 @@ $(".listPostsRow1").append( $('.cache1') );
 $(".listPostsRow2").append( $('.cache2') );
 
 
-
-// Slider formulaire de contact
+// Slider contact
 class Slider {
     constructor() {
 		$('#btn_contact').wi
@@ -56,7 +53,7 @@ class Slider {
 				marginLeft: "-100%",
 			},300);
 		})
-    }
+  }
 }
 
 if ($("#btn_contact").length) {
@@ -64,7 +61,7 @@ if ($("#btn_contact").length) {
 }
 
 
-// Slide description au blog
+// Slide blog description
 $(".blog_description").css("display", "none");
 let degrees = 0;
 
@@ -76,8 +73,7 @@ $("#blog_author, #plus .fa-plus").on('click', function () {
 })
 
 
-
-// Billet au survole
+// Mouseover slide post
 if ($(".post2").length) {
 	document.querySelector(".post2").addEventListener('mouseover', function () {
 		document.querySelector(".cache1").style.transition = 'transform 0.3s' 
@@ -106,9 +102,10 @@ if ($(".post3").length) {
 	})
 }
 
-// Ancre / scroll vers les commentaires
+
+// Comments target / Scroll to the comments
 $(document).ready( function () {
 	$('.comments_target').click(function() {
-	  $('html,body').animate({scrollTop: ( $(".container_comment_form").offset().top - $("#bar").height() )}, 'slow'      );
+	  $('html,body').animate({scrollTop: ( $(".container_comment_form").offset().top - $("#bar").height() )}, 'slow');
 	});  
- })
+})

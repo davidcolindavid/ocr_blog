@@ -1,22 +1,21 @@
 <?php
 
-// Chargement des classes
+// load the classes
 require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
 
 function listPosts($currentPage)
 {   
-    
     $perPage = 4;
     //$currentPage = 1;
 
-    $postManager = new \OpenClassrooms\Blog\Model\PostManager(); // Création d'un objet
-    $posts = $postManager->getPosts($perPage, $currentPage); // Appel d'une fonction de cet objet
+    $postManager = new \OpenClassrooms\Blog\Model\PostManager(); // creation of an object
+    $posts = $postManager->getPosts($perPage, $currentPage); // call a function of this object
     $paging = $postManager->getPaging();
     
-    // Donnée pour la pagination
+    // data for the pagination
     $nbPage = ceil($paging['nb_posts'] / $perPage);
-    // Donnée pour définir le folio d'un billet
+    // data to define folio of the post
     if (isset($_GET['id'])) {
         $folio =  ($paging['nb_posts']+1) - (($_GET['id'] - 1) * $perPage);
     } 
@@ -45,6 +44,7 @@ function addComment($postId, $author, $comment)
     $affectedLines = $commentManager->postComment($postId, $author, $comment);
     $lastComment = $commentManager->getComment($_GET['id']);
 
+    // data for the ajax request / add the comment to the DOM
     $lastCommentId = $lastComment['id'];
     $lastCommentAuthor = htmlspecialchars($lastComment['author']);
     $lastCommentDate = $lastComment['comment_date_fr'];
@@ -52,10 +52,8 @@ function addComment($postId, $author, $comment)
 
     if (isAjax()) { 
         $array = [$lastCommentId, $lastCommentAuthor, $lastCommentDate, $lastCommentContent, $postId];
-        // J'indique au navigateur que je retourne du JSON
         header('Content-type: application/json');
-        // Je transforme mon tableau en JSON et je l'imprime dans le body de ma réponse
-        echo json_encode($array);
+        echo json_encode($array); // transform the array into JSON
     }
     else {
         if ($affectedLines === false) {
@@ -70,7 +68,6 @@ function addComment($postId, $author, $comment)
 function reportComment($commentId, $postId)
 {
     $commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
-
     $affectedLines = $commentManager->commentToReport($commentId);
 
     if ($affectedLines === false) {

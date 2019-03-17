@@ -2,7 +2,8 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Login</title>
+        <title>Login - Billet simple pour l'Alaska</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="public/css/fonts.css" rel="stylesheet" />
         <link href="public/css/backend.css" rel="stylesheet" /> 
     </head>

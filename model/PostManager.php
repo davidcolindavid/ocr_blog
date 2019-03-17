@@ -17,10 +17,9 @@ class PostManager extends Manager
     public function getPaging()
     {
         $db = $this->dbConnect();
-        $req = $db->query('SELECT COUNT(*) AS nb_posts FROM posts '); //récupère le contenu de la requête dans $req
+        $req = $db->query('SELECT COUNT(*) AS nb_posts FROM posts ');
         $nbPosts = $req->fetch();
       
-        
         return $nbPosts;
     }
 

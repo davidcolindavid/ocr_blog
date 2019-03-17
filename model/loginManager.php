@@ -8,7 +8,7 @@ class LoginManager extends Manager
 {
     public function getPass($username, $password)
     {
-        //  Récupération de l'utilisateur et de son pass hashé
+        // get the user and the hash password
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT * FROM user WHERE pseudo = :username');
         $req->execute(array(
@@ -16,7 +16,7 @@ class LoginManager extends Manager
         ));
         $result = $req->fetch();
 
-        // Comparaison du pass envoyé via le formulaire avec la base
+        // compare the 2 passwords
         $correctPassword = password_verify($password, $result['pass']);
 
         return $correctPassword;

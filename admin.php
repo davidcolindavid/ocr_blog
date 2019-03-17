@@ -2,7 +2,8 @@
 session_start();
 require('controller/backend.php');
 
-try { // On essaie de faire des choses
+try {
+    // check if the user is connected
     if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])) {
         if (isset($_GET['action'])) {
             if ($_GET['action'] == 'listPosts') {
@@ -16,7 +17,6 @@ try { // On essaie de faire des choses
                     deletePost();
                 }
                 else {
-                    // Erreur ! On arrête tout, on envoie une exception, donc au saute directement au catch
                     throw new Exception('Aucun identifiant de billet envoyé');
                 }
             }
@@ -25,7 +25,6 @@ try { // On essaie de faire des choses
                     editPost();
                 }
                 else {
-                    // Erreur ! On arrête tout, on envoie une exception, donc au saute directement au catch
                     throw new Exception('Aucun identifiant de billet envoyé');
                 }
             }
@@ -35,12 +34,10 @@ try { // On essaie de faire des choses
                         updatePost($_GET['id'], $_POST['post_title'], $_POST['post_content']);
                     }
                     else {
-                        // Autre exception
                         throw new Exception('Tous les champs ne sont pas remplis !');
                     }
                 }
                 else {
-                    // Autre exception
                     throw new Exception('Aucun identifiant de billet envoyé');
                 }
             }
@@ -49,7 +46,6 @@ try { // On essaie de faire des choses
                     deleteComment();
                 }
                 else {
-                    // Erreur ! On arrête tout, on envoie une exception, donc au saute directement au catch
                     throw new Exception('Aucun identifiant de commentaire envoyé');
                 }
             }
@@ -58,7 +54,6 @@ try { // On essaie de faire des choses
                     cancelReportComment();
                 }
                 else {
-                    // Autre exception
                     throw new Exception('Aucun identifiant de commentaire envoyé');
                 }
             }
@@ -70,10 +65,11 @@ try { // On essaie de faire des choses
             listPostsComments();
         }
     }
+    // go to login page if the user is not connected
     else {
         header('Location: login.php');
     }
 }
-catch(Exception $e) { // S'il y a eu une erreur, alors...
+catch(Exception $e) {
     echo 'Erreur : ' . $e->getMessage();
 }
