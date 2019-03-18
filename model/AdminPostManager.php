@@ -36,7 +36,7 @@ class AdminPostManager extends Manager
     public function postToAdd()
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO posts(title, content) VALUES(:title, :content)');
+        $req = $db->prepare('INSERT INTO posts(title, content, creation_date) VALUES(:title, :content, NOW())');
         $affectedLines = $req->execute(array(
             'title' => $_POST['post_title'],
             'content' => $_POST['post_content']
