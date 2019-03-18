@@ -285,6 +285,7 @@ h3 a:hover {
     text-align: center;
     border: 4px solid #000; 
     box-sizing: border-box;
+    -webkit-appearance: none;
 }
 #message {
     resize: none;
@@ -352,6 +353,7 @@ h3 a:hover {
     
     #btn_contact, #btn_send {
         margin-top: 15px;
+        font-size: 3em !important;
     }
 
     #email, #message {
@@ -549,7 +551,7 @@ footer {
 
 @media all and (max-width: 768px)
 {
-    #btn_send {
+    .container_comment_form #btn_send {
         font-size: 1.5em !important;
     }
 }
