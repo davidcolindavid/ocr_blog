@@ -78,6 +78,18 @@ function reportComment($commentId, $postId)
     }
 }
 
+function sendEmail($email, $message)
+{   
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "fail";
+    } else {
+        $headers = 'FROM: ' . $email;
+        $headers .= "Content-type: text/html; charset=\"utf-8\"";
+        mail('nom@mail.com', 'Formulaire de contact', $message, $headers);
+        echo "success";
+    }
+}
+
 function isAjax()
 {
     return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';

@@ -109,18 +109,18 @@ $posts->closeCursor();
             </div>
         </div>
 
-        <form class="contact_send">
+        <form class="contact_send" action="index.php?action=sendEmail" method="post">
             <div class="contact_col3">
                 <input type="text" name="email" id="email" placeholder="Email">
                 <textarea id="message" name="message" placeholder="Votre message"></textarea>
             </div>
 
             <div class="contact_col4">
-                <button id="btn_send">Envoyer</button>
+                <button type="submit" id="btn_send">Envoyer</button>
             </div>
         </form>
-
     </div>
+    <div class="contact_message">Email envoyé</div>
 </section>
 
 <!-- pagination -->

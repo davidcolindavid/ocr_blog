@@ -30,7 +30,7 @@ try {
                     addComment($_GET['id'], $_POST['author'], $_POST['comment']);
                 }
                 else {
-                    throw new Exception('Tous les champs ne sont pas remplis !');
+                    throw new Exception('Tous les champs ne sont pas remplis');
                 }
             }
             else {
@@ -43,6 +43,14 @@ try {
             }
             else {
                 throw new Exception('Aucun identifiant de billet envoyé');
+            }
+        }
+        elseif ($_GET['action'] == 'sendEmail') {
+            if (!empty($_POST['email']) && !empty($_POST['message'])) {
+                sendEmail($_POST['email'], $_POST['message']);
+            }
+            else {
+                throw new Exception('Tous les champs ne sont pas remplis');
             }
         }
     }

@@ -60,6 +60,53 @@ if ($("#btn_contact").length) {
 	const contact = new Slider ()
 }
 
+if ($('.contact_send').length) {
+	$('.contact_send').on('submit', function(e) {
+		e.preventDefault();
+		let formElt = $(this);
+		let url = formElt.attr('action');
+		let email = document.querySelector('#email');
+		let message = document.querySelector('#message');
+
+		// check if the fields username et password are empties
+		if (email.value.trim().length === 0 || message.value.trim().length === 0) {
+				// report username if empty
+				if (email.value.length === 0) {
+					email.style.border = "4px dotted #000000";
+					email.addEventListener("focus", function () {
+						email.style.border = "4px solid #000000";
+					}) 
+				// report password if empty
+				} else if (message.value.length === 0) {
+					message.style.border = "4px dotted #000000";
+					message.addEventListener("click", function () {
+							message.style.border = "4px solid #000000";
+					})
+				}
+		} else {
+				$.ajax({
+						type: "POST",
+						url: url,
+						data: formElt.serializeArray(),
+						success: function(response) {
+								if(response=="success")
+								{	
+									$(".contact_message").html('Email envoyé')
+									$(".contact_send")[0].reset()
+									$('.contact_message').slideDown();
+									$('.contact_message').delay(2000).slideUp();
+								}
+								else
+								{   
+									$(".contact_message").html('Email invalide')
+									$('.contact_message').slideDown();
+									$('.contact_message').delay(2000).slideUp();							}
+						},
+								
+				})
+		}
+	});
+}
 
 // Slide blog description
 $(".blog_description").css("display", "none");
